@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using TimeKeeper.Interfaces;
+using TimeKeeper.Models;
 
 
 namespace TimeKeeper.Controllers
@@ -26,11 +26,44 @@ namespace TimeKeeper.Controllers
             return View("Index", model);
         }
 
-        public async Task<IActionResult> Create()
+        [HttpGet]
+        public async Task<IActionResult> GetLearningNote(int id)
         {
+            var userId = _userService.GetUserId(_httpContextAccessor.HttpContext?.User);
+            var model = await _learningNoteService.GetLearningNote(id);
+            return View("LearningNote", model);
+        }
 
+
+        [HttpPost]
+        public async Task<IActionResult> CreateLearningNote([Bind("Label","Description")] LearningNote aLearningNote)
+        {
+            var userId = _userService.GetUserId(_httpContextAccessor.HttpContext?.User);
+            aLearningNote.UserId = userId;
+            await _learningNoteService.SaveLearningNote(aLearningNote);
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateLearningNote(int id, [Bind("Label", "Description")] LearningNote aLearningNote)
+        {
+            var userId = _userService.GetUserId(_httpContextAccessor.HttpContext?.User);
+            var learningNote = await _learningNoteService.GetLearningNote(id);
+            learningNote.Label = aLearningNote.Label;
+            learningNote.Description = aLearningNote.Description;
+            await _learningNoteService.UpdateLearningNote(learningNote);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteLearningNoteById(int id)
+        {
+            var userId = _userService.GetUserId(_httpContextAccessor.HttpContext?.User);
+            await _learningNoteService.DeleteLearningNote(id);
+            return RedirectToAction("Index");
+        }
+
+
     }
 }
 

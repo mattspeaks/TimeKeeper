@@ -4,50 +4,39 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Notes</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Label)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Label)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div style="display: flex; justify-content: center;">
+    <div class="card border-primary mb-3 shadow-lg" style="max-width: 22rem; width: 100%;">
+        <form asp-action="CreateLearningNote" class="p-3">
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Label</label>
+                    <input type="text" name="Label" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Description</label>
+                    <textarea name="Description" class="form-control" rows="4"></textarea>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary btn-sm">Add Note</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+<div style="display:flex; flex-direction:row; align-content:flex-start; align-items:flex-start; flex-wrap:wrap;">
+@foreach (var note in Model)
+{
+    <div class="card text-white border-dark bg-secondary mb-3" style="min-width:18rem; max-width:18rem; min-height:12rem; height:auto; margin:.75rem;">
+        <div class="card-header"><h5 class="card-title">@Html.DisplayFor(modelNote => note.Label)</h5></div> 
+        <div class="card-body"> 
+            <p class="card-text">@Html.DisplayFor(modelNote => note.Description)</p> 
+        </div> 
+        </div> 
+} 
+</div>
