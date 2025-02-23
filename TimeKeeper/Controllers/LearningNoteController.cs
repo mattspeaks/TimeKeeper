@@ -19,10 +19,11 @@ namespace TimeKeeper.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchString)
         {
             var userId = _userService.GetUserId(_httpContextAccessor.HttpContext?.User);
-            var model = await _learningNoteService.GetLearningNotes(userId);
+            var model = await _learningNoteService.GetLearningNotes(userId, searchString);
+            ViewBag.SearchString = searchString;
             return View("Index", model);
         }
 
@@ -56,7 +57,7 @@ namespace TimeKeeper.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteLearningNoteById(int id)
+        public async Task<IActionResult> Destroy(int id)
         {
             var userId = _userService.GetUserId(_httpContextAccessor.HttpContext?.User);
             await _learningNoteService.DeleteLearningNote(id);

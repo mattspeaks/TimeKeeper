@@ -27,11 +27,11 @@ namespace TimeKeeper.Services
             }
         }
 
-        public async Task<List<LearningNote>> GetLearningNotes(string userId)
+        public async Task<List<LearningNote>> GetLearningNotes(string userId, string? searchString)
         {
             try
             {
-                var learningNotes = await _learningNoteRepository.GetLearningNoteByUserId(userId);
+                var learningNotes = await _learningNoteRepository.GetLearningNoteByUserId(userId, searchString);
                 return learningNotes;
             }
             catch (Exception ex)

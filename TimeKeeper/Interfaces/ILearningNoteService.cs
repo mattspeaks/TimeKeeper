@@ -4,7 +4,7 @@ namespace TimeKeeper.Interfaces
 {
     public interface ILearningNoteService
     {
-        Task<List<LearningNote>> GetLearningNotes(string userId);
+        Task<List<LearningNote>> GetLearningNotes(string userId, string? SearchString);
 
         Task<LearningNote> GetLearningNote(int id);
 

@@ -13,9 +13,19 @@ namespace TimeKeeper.Repositories
             _context = context;
         }
 
-        public async Task<List<LearningNote>> GetLearningNoteByUserId(string userId)
+        public async Task<List<LearningNote>> GetLearningNoteByUserId(string userId, string? SearchString)
         {
-            return await _context.LearningNote.Where(ln => ln.UserId == userId).ToListAsync();
+            if (string.IsNullOrEmpty(SearchString))
+            {
+                return await _context.LearningNote
+                    .Where(ln => ln.UserId == userId)
+                    .ToListAsync();
+            }
+            return await _context.LearningNote
+                .Where(ln => ln.UserId == userId &&
+                             (ln.Label != null && ln.Label.Contains(SearchString) ||
+                              ln.Description != null && ln.Description.Contains(SearchString)))
+                .ToListAsync();
         }
 
        public async Task<LearningNote> GetLearningNoteById(int id)
