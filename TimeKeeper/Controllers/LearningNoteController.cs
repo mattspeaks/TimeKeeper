@@ -46,10 +46,10 @@ namespace TimeKeeper.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateLearningNote(int id, [Bind("Label", "Description")] LearningNote aLearningNote)
+        public async Task<IActionResult> Update([Bind("Id","Label", "Description")] LearningNote aLearningNote)
         {
             var userId = _userService.GetUserId(_httpContextAccessor.HttpContext?.User);
-            var learningNote = await _learningNoteService.GetLearningNote(id);
+            var learningNote = await _learningNoteService.GetLearningNote(aLearningNote.Id);
             learningNote.Label = aLearningNote.Label;
             learningNote.Description = aLearningNote.Description;
             await _learningNoteService.UpdateLearningNote(learningNote);
