@@ -85,16 +85,20 @@
 @foreach (var note in Model)
 {
     <div class="modal fade" id="@note.Id" tabindex="-1" aria-labelledby="modal-@note.Id" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <form asp-action="Update" method="post">
-					<input type="hidden" name="Id" value="@note.Id" />
-                    <div class="modal-header">
+					<input type="hidden" name="Id" value="@note.Id" />     
+                    <div class="modal-header" style="display:flex; flex-direction:column" >
+                        <div style="display:flex; flex-direction:row; justify-content:space-between">
+                            <label>Label</label>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
                         <input class="form-control" name="Label" value="@note.Label">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-						<textarea class="form-control" name="Description">@Html.DisplayFor(description => note.Description)</textarea>
+						<label>Description</label>
+                        <textarea class="form-control" style="min-height:min-content" name="Description">@Html.DisplayFor(description => note.Description)</textarea>
                     </div>
                     <div class="modal-footer" style="justify-content:space-between">
                         <button type="button" onclick="handleDelete(@note.Id)" class="btn btn-light btn-sm">
