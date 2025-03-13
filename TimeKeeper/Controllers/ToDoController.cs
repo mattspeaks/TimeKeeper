@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using TimeKeeper.Interfaces;
 using TimeKeeper.Models;
 

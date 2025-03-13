@@ -1,10 +1,10 @@
-﻿@model IEnumerable<TimeKeeper.Models.TimekeeperDay>
+﻿@model TimeKeeper.Models.ViewModels.TimekeeperDayViewModel
 
 @{
     ViewData["Title"] = "Index ";
 }
 
-<h1>View</h1>
+<h1>@Html.DisplayNameFor(model => model.Date)</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,29 +13,29 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+                Start
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserId)
+                Description
             </th>
-            <th></th>
+            <th>
+                End
+            </th>
         </tr>
     </thead>
-@*     <tbody> *@
-@* @foreach (var item in Model) { *@
-@*         <tr> *@
-@*             <td> *@
-@*                 @Html.DisplayFor(modelItem => item.Date) *@
-@*             </td> *@
-@*             <td> *@
-@*                 @Html.DisplayFor(modelItem => item.UserId) *@
-@*             </td> *@
-@*             <td> *@
-@*                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> | *@
-@*                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> | *@
-@*                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> *@
-@*             </td> *@
+@*     <tbody>  *@
+@* @foreach (var eventItem in Model.TimekeeperEvents) *@
+@*      { *@
+@*          <tr> *@
+@*         <td> *@
+@*             @Html.DisplayFor(modelItem => eventItem.Start) *@
+@*         </td> *@
+@*         <td> *@
+@*             @Html.DisplayFor(modelItem => eventItem.Description) *@
+
+@*         </td> *@
+@*             @Html.DisplayFor(modelItem => eventItem.End) *@
 @*         </tr> *@
-@* } *@
-@*     </tbody> *@
+@*  } *@
+@*      </tbody> *@
 </table>

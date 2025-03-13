@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using TimeKeeper.Data;
-using Microsoft.Extensions.DependencyInjection;
-using TimeKeeper.Models;
 using TimeKeeper.Interfaces;
+using TimeKeeper.Models;
 using TimeKeeper.Repositories;
 using TimeKeeper.Services;
 
@@ -29,11 +27,14 @@ builder.Services.AddControllersWithViews();
 //Add Repos
 builder.Services.AddScoped<ILearningNoteRepository, LearningNoteRepository>();
 builder.Services.AddScoped<IToDoRepository, ToDoRepository>();
+builder.Services.AddScoped<ITimekeeperDayRepository, TimekeeperDayRepository>();
+builder.Services.AddScoped<ITimekeeperEventRepository, TimekeeperEventRepository>();
 
 //Add Services
 builder.Services.AddScoped<ILearningNoteService, LearningNoteService>();
 builder.Services.AddScoped<IToDoNoteService, ToDoNoteService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITimekeeperDayService, TimekeeperDayService>();
 
 builder.Services.AddHttpContextAccessor();
 
